@@ -18,6 +18,12 @@ const useAPICall = () => {
       .get(`${BANKAPI.BASE_URL}${ACCOUNTS}`, { headers: clientHeader })
       .then((details) => {
         setAccountList(details.data.accounts);
+      })
+      .catch(function (error) {
+        console.log(error);
+        if (error.response.data.errors) {
+          setFailedMessage(error.response.data.errors);
+        }
       });
   };
 
